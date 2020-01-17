@@ -1,13 +1,27 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const dotenv = require('dotenv');
+const path = require('path');
+const colors = require('colors');
+const cookieParser = require('cookie-parser');
+const fileupload = require('express-fileupload');
+const logger = require('morgan');
+const connectDB = require('./config/db');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Load env variables
+dotenv.config({ path: './config/config.env' });
 
-var app = express();
+// Connect database
+connectDB();
+
+// Routes
+const indexRouter = require('./routes/index');
+const auth = require('./routes/auth');
+
+const app = express();
+
+// Body parser
+app.use(express.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
