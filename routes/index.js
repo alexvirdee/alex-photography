@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const { getPhotographs } = require('../controllers/photographs');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+const Photograph = require('../models/Photograph');
+const advancedResults = require('../middleware/advancedResults');
+
+const router = express.Router();
+
+router.route('/').get(advancedResults(Photograph), getPhotographs);
 
 module.exports = router;
