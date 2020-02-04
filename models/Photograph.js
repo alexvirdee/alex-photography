@@ -10,6 +10,10 @@ const PhotographSchema = new mongoose.Schema({
     trim: true,
     maxLength: [80, 'Please create a shorter title name']
   },
+  type: {
+    type: String,
+    required: [true, 'Please add the type of photograph']
+  },
   slug: String,
   description: {
     type: String,
